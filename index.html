@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enode - Infrastructure for green energy apps</title>
+  
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              DEFAULT: '#00780C',
+              dark: '#002203',
+              deep: '#17290E',
+              cardDark: '#0E6400',
+              codeDark: '#191610',
+              accent: '#C0DEC3',
+              light: '#DFEEE1',
+              lime: '#EFFCD4',
+              neon: '#E1FCAE',
+            },
+            warm: {
+              sand: '#F5F3EE',
+              card: '#FAFAF9',
+              border: '#EBE8DF',
+              muted: '#555C54',
+              text: '#505038',
+            }
+          },
+          maxWidth: {
+            'figma': '1200px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* CSS only accordion / tab state handling without JavaScript */
+    .tab-input:checked + .tab-label {
+      background-color: #FFFFFF;
+      color: #002203;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      border-color: #E5E7EB;
+    }
+    
+    /* Clean custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F3EE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C0DEC3;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00780C;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-[#002203] bg-white selection:bg-[#C0DEC3] selection:text-[#00780C]">
+
+  <!-- ========================================================================= -->
+  <!-- 1. NAVIGATION BAR                                                         -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      
+      <!-- Left: Logo & Nav items -->
+      <div class="flex items-center gap-10">
+        <a href="#" class="flex items-center" aria-label="Enode Home">
+          <img src="assets/logo.png" alt="Enode" class="h-6 w-auto object-contain">
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-8 text-[15px] font-normal text-[#002203]">
+          <!-- Products with dropdown -->
+          <div class="relative group">
+            <button type="button" class="flex items-center gap-1.5 hover:text-[#00780C] transition py-2">
+              <span>Products</span>
+              <svg class="w-3.5 h-3.5 transition group-hover:rotate-180 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="absolute left-0 top-full pt-2 w-56 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200">
+              <div class="bg-white rounded-xl shadow-xl border border-[#F0EFEA] p-3 space-y-1">
+                <a href="#connect" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Connect API</a>
+                <a href="#optimize" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Optimize</a>
+                <a href="#aggregate" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Aggregate</a>
+              </div>
+            </div>
+          </div>
+
+          <a href="#use-cases" class="hover:text-[#00780C] transition">Use cases</a>
+          <a href="#pricing" class="hover:text-[#00780C] transition">Pricing</a>
+          
+          <!-- Company with dropdown -->
+          <div class="relative group">
+            <button type="button" class="flex items-center gap-1.5 hover:text-[#00780C] transition py-2">
+              <span>Company</span>
+              <svg class="w-3.5 h-3.5 transition group-hover:rotate-180 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="absolute left-0 top-full pt-2 w-52 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200">
+              <div class="bg-white rounded-xl shadow-xl border border-[#F0EFEA] p-3 space-y-1">
+                <a href="#about" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">About us</a>
+                <a href="#blog" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Blog</a>
+                <a href="#careers" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Careers</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Developers with dropdown -->
+          <div class="relative group">
+            <button type="button" class="flex items-center gap-1.5 hover:text-[#00780C] transition py-2">
+              <span>Developers</span>
+              <svg class="w-3.5 h-3.5 transition group-hover:rotate-180 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="absolute left-0 top-full pt-2 w-52 opacity-0 translate-y-1 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-200">
+              <div class="bg-white rounded-xl shadow-xl border border-[#F0EFEA] p-3 space-y-1">
+                <a href="#docs" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Documentation</a>
+                <a href="#api-reference" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">API Reference</a>
+                <a href="#guides" class="block px-3 py-2 text-sm rounded-lg hover:bg-[#F5F3EE] hover:text-[#00780C] transition">Feature Guides</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Right: Action Buttons -->
+      <div class="flex items-center gap-4">
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 text-[15px] font-medium text-[#002203] hover:text-[#00780C] transition px-3 py-2">
+          <span>Contact sales</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        <a href="#start" class="inline-flex items-center gap-1.5 text-[15px] font-medium text-[#00780C] bg-[#C0DEC3] hover:bg-[#aed3b1] px-4 py-2 rounded-lg transition duration-150">
+          <span>Start building</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ========================================================================= -->
+  <!-- 2. HERO SECTION                                                           -->
+  <!-- ========================================================================= -->
+  <section class="relative overflow-hidden pt-12 pb-24 lg:pt-20 lg:pb-36 bg-white">
+    <div class="max-w-figma mx-auto px-6 lg:px-10 relative">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Hero Text -->
+        <div class="lg:col-span-7 z-10">
+          <h1 class="text-5xl sm:text-6xl lg:text-[72px] font-normal tracking-tight text-[#002203] leading-[1.05]">
+            Infrastructure for green energy apps
+          </h1>
+          <p class="mt-8 text-lg sm:text-[18px] text-[#555C54] leading-relaxed max-w-xl">
+            Companies of all sizes, from startups to the largest energy companies in the world, use Enode's APIs to create new green energy apps and services.
+          </p>
+          
+          <!-- Hero CTA buttons -->
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a href="#start" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#E0EFE1] hover:bg-[#d0e5d2] text-[#00780C] font-medium text-[15px] transition">
+              <span>Start building</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#F5F3EE] hover:bg-[#eae6de] text-[#505038] font-medium text-[15px] transition">
+              <span>Contact sales</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero 3D Illustration -->
+        <div class="lg:col-span-5 relative flex justify-center lg:justify-end">
+          <div class="w-full max-w-[580px] lg:max-w-none">
+            <img src="assets/hero-illustration.png" alt="Enode Green Energy Infrastructure Illustration" class="w-full h-auto object-contain">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 3. CLIENT LOGOS / SOCIAL PROOF BAR                                        -->
+  <!-- ========================================================================= -->
+  <section class="py-12 border-t border-[#F0EFEA] bg-white">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      <div class="flex items-center justify-between gap-8 flex-wrap lg:flex-nowrap opacity-80 hover:opacity-100 transition">
+        <div class="flex items-center justify-center w-36 h-12">
+          <img src="assets/partner-1.png" alt="Partner Monta" class="max-h-7 max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center w-28 h-12">
+          <img src="assets/partner-2.png" alt="Partner Tibber" class="max-h-6 max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center w-32 h-12">
+          <img src="assets/partner-3.png" alt="Partner TotalEnergies" class="max-h-8 max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center w-36 h-12">
+          <img src="assets/partner-4.png" alt="Partner OVO" class="max-h-8 max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center w-32 h-12">
+          <img src="assets/partner-5.png" alt="Partner E.ON" class="max-h-10 max-w-full object-contain">
+        </div>
+        <div class="flex items-center justify-center w-36 h-12">
+          <img src="assets/partner-6.png" alt="Partner Good Energy" class="max-h-8 max-w-full object-contain">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 4. PLATFORM SECTION                                                       -->
+  <!-- ========================================================================= -->
+  <section id="platform" class="py-24 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <!-- Tag & Heading -->
+      <div>
+        <span class="text-[#00780C] text-[15px] sm:text-[18px] font-medium tracking-wide uppercase">Our platform</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-[39px] font-normal text-[#002203] mt-3 max-w-3xl leading-tight">
+          The A-Z of what you need to build the future of green energy apps
+        </h2>
+      </div>
+
+      <!-- 3 Descriptive Paragraphs -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-[18px] leading-relaxed text-[#555C54]">
+        <div>
+          <p>
+            Our <strong class="text-[#00780C] font-semibold">Connect API</strong> handles the complex task of connecting to and controlling all energy hardware. That way, you can focus on building the best green energy app for your customers.
+          </p>
+        </div>
+        <div>
+          <p>
+            Our <strong class="text-[#00780C] font-semibold">Optimize</strong> features, including smart EV charging, help your users consume energy in a smarter, greener and cheaper way. A fully renewable energy system is dependent on flexible demand that can adapt to the intermittent supply from wind and solar.
+          </p>
+        </div>
+        <div>
+          <p>
+            And our <strong class="text-[#00780C] font-semibold">Aggregate</strong> engine lets you control all of your users' energy hardware as a single virtual power plant.
+          </p>
+        </div>
+      </div>
+
+      <!-- Diagram / Comparison Container -->
+      <div class="mt-16 bg-[#FAFAF9] border border-[#EBE8DF] rounded-3xl p-6 sm:p-10">
+        
+        <!-- Tab selector -->
+        <div class="flex items-center gap-2 mb-8">
+          <button type="button" class="px-5 py-2.5 rounded-lg bg-white border border-[#DDD9CE] text-[#002203] font-medium text-[15px] shadow-sm">
+            With Enode
+          </button>
+          <button type="button" class="px-5 py-2.5 rounded-lg bg-[#F5F3EE] text-[#6B7280] hover:text-[#002203] font-medium text-[15px] transition">
+            Without Enode
+          </button>
+        </div>
+
+        <!-- High-res interactive architecture diagram -->
+        <div class="rounded-2xl overflow-hidden bg-white border border-[#EBE8DF] shadow-sm">
+          <img src="assets/platform-diagram.png" alt="With Enode vs Without Enode Connection Architecture" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- Metrics below diagram -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+          <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] flex items-center gap-4">
+            <span class="text-4xl font-bold text-[#002203]">1</span>
+            <span class="text-sm sm:text-base text-[#555C54]">connection handled by you</span>
+          </div>
+          <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] flex items-center gap-4">
+            <span class="text-4xl font-bold text-[#00780C]">45+</span>
+            <span class="text-sm sm:text-base text-[#555C54]">connections handled by Enode</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 5. CONNECT FEATURE SECTION                                                -->
+  <!-- ========================================================================= -->
+  <section id="connect" class="py-20 lg:py-28 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-6">
+          <span class="text-[#00780C] text-[15px] sm:text-[18px] font-medium uppercase tracking-wider">Connect</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-[39px] font-normal text-[#002203] mt-3 leading-tight">
+            One powerful API, hundreds of EVs and energy devices
+          </h2>
+          <p class="mt-6 text-[18px] text-[#555C54] leading-relaxed">
+            Easily connect to and control your customers’ electric vehicles, thermostats, solar panels and more.
+          </p>
+
+          <!-- Bullets -->
+          <ul class="mt-8 space-y-4 text-[15px] text-[#002203]">
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>One API for over 20+ hardware brands</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>100+ devices supported and counting</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>SDKs and ready-built connection flows</span>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a href="#learn-more" class="inline-flex items-center gap-2 text-[#00780C] font-medium text-[15px] hover:underline group">
+              <span>Learn more</span>
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Illustration Column -->
+        <div class="lg:col-span-6 flex justify-center">
+          <div class="w-full max-w-[560px]">
+            <img src="assets/connect-illustration.png" alt="Connect API Illustration" class="w-full h-auto object-contain">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 6. OPTIMIZE FEATURE SECTION (Reversed Layout)                             -->
+  <!-- ========================================================================= -->
+  <section id="optimize" class="py-20 lg:py-28 bg-[#FAFAF9] border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Illustration Column (Left) -->
+        <div class="lg:col-span-6 order-2 lg:order-1 flex justify-center">
+          <div class="w-full max-w-[560px]">
+            <img src="assets/optimize-illustration.png" alt="Optimize APIs Illustration" class="w-full h-auto object-contain">
+          </div>
+        </div>
+
+        <!-- Text Column (Right) -->
+        <div class="lg:col-span-6 order-1 lg:order-2">
+          <span class="text-[#00780C] text-[15px] sm:text-[18px] font-medium uppercase tracking-wider">Optimize</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-normal text-[#002203] mt-3 leading-tight">
+            Enable smart energy use cases for your customers
+          </h2>
+          <p class="mt-6 text-[18px] text-[#555C54] leading-relaxed">
+            Ready-made building blocks to help your customers consume energy in a smarter, more sustainable way.
+          </p>
+
+          <!-- Bullets -->
+          <ul class="mt-8 space-y-4 text-[15px] text-[#002203]">
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Out-of-the-box smart charging APIs</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Statistics and insights APIs</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Endpoints to build your own features</span>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a href="#learn-more" class="inline-flex items-center gap-2 text-[#00780C] font-medium text-[15px] hover:underline group">
+              <span>Learn more</span>
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 7. AGGREGATE FEATURE SECTION                                              -->
+  <!-- ========================================================================= -->
+  <section id="aggregate" class="py-20 lg:py-28 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Text Column -->
+        <div class="lg:col-span-6">
+          <span class="text-[#00780C] text-[15px] sm:text-[18px] font-medium uppercase tracking-wider">Aggregate</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-normal text-[#002203] mt-3 leading-tight">
+            Accelerate the transition to a sustainable future
+          </h2>
+          <p class="mt-6 text-[18px] text-[#555C54] leading-relaxed">
+            Aggregation of flexible demand is key to a grid powered by renewable energy. By aggregating your customer's energy loads you can smooth out intermittencies caused by renewables. It also provides new revenue streams for your business.
+          </p>
+
+          <!-- Bullets -->
+          <ul class="mt-8 space-y-4 text-[15px] text-[#002203]">
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Participate in flexibility markets</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Unlock new revenue streams</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#E0EFE1] flex items-center justify-center text-[#00780C] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Monitoring, demand response and reporting APIs</span>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a href="#learn-more" class="inline-flex items-center gap-2 text-[#00780C] font-medium text-[15px] hover:underline group">
+              <span>Learn more</span>
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Illustration Column -->
+        <div class="lg:col-span-6 flex justify-center">
+          <div class="w-full max-w-[560px]">
+            <img src="assets/aggregate-illustration.png" alt="Aggregate Energy API Illustration" class="w-full h-auto object-contain">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 8. DEVELOPER SECTION (Dark Theme #191610)                                 -->
+  <!-- ========================================================================= -->
+  <section id="developers" class="py-24 bg-[#191610] text-white">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        
+        <!-- Left: Text -->
+        <div class="lg:col-span-6">
+          <span class="text-[#22C55E] text-[15px] sm:text-[18px] font-medium uppercase tracking-wider">By developers, for developers</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-[38px] font-normal text-white mt-3 leading-tight">
+            A single API for hundreds of green energy devices
+          </h2>
+          <p class="mt-6 text-[18px] text-gray-300 leading-relaxed">
+            Access and control 100s of EV models and energy devices through a few lines of code, and save months of tedious integration work.
+          </p>
+
+          <!-- Bullets -->
+          <ul class="mt-8 space-y-4 text-[15px] text-gray-200">
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#22C55E]/20 flex items-center justify-center text-[#22C55E] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>A single RESTful API for all connections</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#22C55E]/20 flex items-center justify-center text-[#22C55E] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Web and native SDKs for hardware connection</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#22C55E]/20 flex items-center justify-center text-[#22C55E] flex-shrink-0">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span>Enterprise grade security by design</span>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a href="#docs" class="inline-flex items-center gap-2 text-[#22C55E] font-medium text-[15px] hover:underline group">
+              <span>Read our docs</span>
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Code Terminal Card -->
+        <div class="lg:col-span-6">
+          <div class="bg-[#1F1C16] border border-white/10 rounded-2xl shadow-2xl overflow-hidden font-mono text-sm">
+            <!-- Terminal Header -->
+            <div class="px-5 py-3.5 bg-black/40 border-b border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#FF5F56]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#FFBD2E]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27C93F]"></span>
+              </div>
+              <span class="text-xs text-gray-400">bash — curl enode.api</span>
+              <span class="text-xs text-[#22C55E]">200 OK</span>
+            </div>
+
+            <!-- Terminal Body -->
+            <div class="p-6 overflow-x-auto text-[13px] leading-relaxed text-gray-300">
+              <div class="text-gray-500 mb-2"># Request vehicle battery state & smart charging status</div>
+              <div class="text-[#22C55E] mb-4">
+                curl -X GET https://api.enode.io/v1/vehicles/veh_98437/charge-state \<br>
+                &nbsp;&nbsp;-H "Authorization: Bearer sec_tok_4f9a"
+              </div>
+
+              <div class="text-gray-500 mb-1">// JSON Response</div>
+              <div class="text-amber-200">
+                {<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"id"</span>: <span class="text-orange-300">"veh_98437"</span>,<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"brand"</span>: <span class="text-orange-300">"Tesla Model Y"</span>,<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"batteryLevel"</span>: <span class="text-cyan-300">84</span>,<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"isCharging"</span>: <span class="text-cyan-300">true</span>,<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"smartChargingEnabled"</span>: <span class="text-cyan-300">true</span>,<br>
+                &nbsp;&nbsp;<span class="text-emerald-400">"nextOptimalChargeWindow"</span>: {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-emerald-400">"start"</span>: <span class="text-orange-300">"01:00 UTC"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-emerald-400">"end"</span>: <span class="text-orange-300">"05:30 UTC"</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-emerald-400">"cleanEnergyRatio"</span>: <span class="text-cyan-300">0.96</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 9. WHY ENODE / STATS SECTION                                              -->
+  <!-- ========================================================================= -->
+  <section id="why-enode" class="py-24 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Left text -->
+        <div class="lg:col-span-5">
+          <span class="text-[#00780C] text-[15px] sm:text-[18px] font-medium uppercase tracking-wider">Why Enode</span>
+          <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-normal text-[#002203] mt-3 leading-tight">
+            Join other industry leading companies to accelerate green energy
+          </h2>
+          <p class="mt-6 text-[18px] text-[#555C54] leading-relaxed">
+            Companies around the world, from startups to large energy providers, use Enode to build green energy apps every day and help consumers use energy in a smarter and greener way.
+          </p>
+
+          <div class="mt-8">
+            <a href="#about" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#F5F3EE] hover:bg-[#eae6de] text-[#505038] font-medium text-[15px] transition">
+              <span>About our company</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right 2x2 Stats Grid -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <!-- Card 1: Lime pastel -->
+          <div class="bg-[#EFFCD4] rounded-3xl p-8 flex flex-col justify-between min-h-[180px]">
+            <span class="text-4xl lg:text-5xl font-normal text-[#002203] tracking-tight">100+</span>
+            <span class="text-sm sm:text-[15px] text-[#002203]/80 font-medium mt-4">Energy hardware models supported</span>
+          </div>
+
+          <!-- Card 2: Highlighted Dark Forest Green Card with White Text -->
+          <div class="bg-[#0E6400] text-white rounded-3xl p-8 flex flex-col justify-between min-h-[180px] shadow-lg">
+            <span class="text-4xl lg:text-5xl font-normal text-white tracking-tight">60+ million</span>
+            <span class="text-sm sm:text-[15px] text-white/90 font-medium mt-4">Energy customers reached</span>
+          </div>
+
+          <!-- Card 3: Lime pastel -->
+          <div class="bg-[#EFFCD4] rounded-3xl p-8 flex flex-col justify-between min-h-[180px]">
+            <span class="text-4xl lg:text-5xl font-normal text-[#002203] tracking-tight">25%</span>
+            <span class="text-sm sm:text-[15px] text-[#002203]/80 font-medium mt-4">Average savings using Enode's Smart Charging</span>
+          </div>
+
+          <!-- Card 4: Lime pastel -->
+          <div class="bg-[#EFFCD4] rounded-3xl p-8 flex flex-col justify-between min-h-[180px]">
+            <span class="text-4xl lg:text-5xl font-normal text-[#002203] tracking-tight">100GWh+</span>
+            <span class="text-sm sm:text-[15px] text-[#002203]/80 font-medium mt-4">Managed through the Enode platform</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 10. USE CASES SECTION                                                     -->
+  <!-- ========================================================================= -->
+  <section id="use-cases" class="py-24 bg-[#FAFAF9] border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <!-- Section Title -->
+      <h2 class="text-2xl sm:text-3xl font-normal text-[#002203] tracking-tight mb-10">
+        Use cases
+      </h2>
+
+      <!-- 4 Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] shadow-sm flex flex-col justify-between group hover:border-[#00780C]/40 hover:shadow-md transition">
+          <div>
+            <div class="w-8 h-1.5 bg-[#E1FCAE] rounded-full mb-4"></div>
+            <h3 class="text-[17px] font-semibold text-[#002203]">Smart charging</h3>
+            <p class="mt-3 text-sm text-[#555C54] leading-relaxed">
+              Optimize the charging of your customers EV with the click of a button. Save money and cut emissions automatically.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-gray-100">
+            <a href="#smart-charging" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] shadow-sm flex flex-col justify-between group hover:border-[#00780C]/40 hover:shadow-md transition">
+          <div>
+            <div class="w-8 h-1.5 bg-[#C0DEC3] rounded-full mb-4"></div>
+            <h3 class="text-[17px] font-semibold text-[#002203]">Energy management and insights</h3>
+            <p class="mt-3 text-sm text-[#555C54] leading-relaxed">
+              Give your customers insight about their energy consumption and hardware status across all their devices.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-gray-100">
+            <a href="#insights" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] shadow-sm flex flex-col justify-between group hover:border-[#00780C]/40 hover:shadow-md transition">
+          <div>
+            <div class="w-8 h-1.5 bg-[#EFFCD4] rounded-full mb-4"></div>
+            <h3 class="text-[17px] font-semibold text-[#002203]">Demand response</h3>
+            <p class="mt-3 text-sm text-[#555C54] leading-relaxed">
+              Unlock the ability to participate in flexibility markets and get paid for balancing the grid.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-gray-100">
+            <a href="#demand-response" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-2xl p-6 border border-[#EBE8DF] shadow-sm flex flex-col justify-between group hover:border-[#00780C]/40 hover:shadow-md transition">
+          <div>
+            <div class="w-8 h-1.5 bg-[#DFEEE1] rounded-full mb-4"></div>
+            <h3 class="text-[17px] font-semibold text-[#002203]">E-mobility</h3>
+            <p class="mt-3 text-sm text-[#555C54] leading-relaxed">
+              Provide smart route planning and rich EV data during public charging sessions.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-gray-100">
+            <a href="#e-mobility" class="inline-flex items-center gap-1.5 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 11. INDUSTRIES AND APPLICATIONS                                           -->
+  <!-- ========================================================================= -->
+  <section id="industries" class="py-24 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <!-- Header row -->
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-2xl sm:text-3xl font-normal text-[#002203] tracking-tight">
+          Industries and applications
+        </h2>
+        <a href="#industries" class="inline-flex items-center gap-1.5 text-[15px] font-medium text-[#00780C] hover:underline">
+          <span>Learn more</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- 8 Cards Grid (2 rows of 4) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- 1: Energy companies -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">Energy companies</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Create engaging energy apps that increase retention and enable new revenue streams.
+          </p>
+        </div>
+
+        <!-- 2: Energy startups and apps -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">Energy startups and apps</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Build the next wave of green energy apps, connecting directly to hardware.
+          </p>
+        </div>
+
+        <!-- 3: E-mobility providers -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">E-mobility providers</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Get real-time EV and charging data across multiple OEMs into your app.
+          </p>
+        </div>
+
+        <!-- 4: DERMS -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">DERMS</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Create residential DR programs with direct access to user's hardware.
+          </p>
+        </div>
+
+        <!-- 5: EV fleet managers -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">EV fleet managers</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Get SoC and location from your entire fleet in real time - all in one place.
+          </p>
+        </div>
+
+        <!-- 6: Utility and grid owners -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">Utility and grid owners</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Anticipate grid constraints with aggregated EV data and control flexible loads.
+          </p>
+        </div>
+
+        <!-- 7: Smart home providers -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">Smart home providers</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            Integrate EVs, thermostats and other energy hardware into your smart home ecosystem.
+          </p>
+        </div>
+
+        <!-- 8: Don’t see your industry? -->
+        <div class="bg-[#FAFAF9] rounded-2xl p-6 border border-[#EBE8DF] hover:border-[#00780C]/30 transition">
+          <h3 class="text-[17px] font-semibold text-[#002203]">Don’t see your industry?</h3>
+          <p class="mt-2 text-sm text-[#555C54] leading-relaxed">
+            We also partner with other types of companies. Reach out to see what we can build together.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 12. LATEST FROM THE BLOG                                                  -->
+  <!-- ========================================================================= -->
+  <section id="blog" class="py-24 bg-[#FAFAF9] border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <!-- Header row -->
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-2xl sm:text-3xl font-normal text-[#002203] tracking-tight">
+          Latest from the blog
+        </h2>
+        <a href="#blog-all" class="inline-flex items-center gap-1.5 text-[15px] font-medium text-[#00780C] hover:underline">
+          <span>View all</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- 4 Blog Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Post 1 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-[#EBE8DF] flex flex-col justify-between group hover:shadow-md transition">
+          <div>
+            <div class="h-44 overflow-hidden bg-[#E0EFE1]/40">
+              <img src="assets/blog-1.png" alt="Enode is now open to everyone" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-6">
+              <span class="inline-block text-xs font-medium text-[#555C54] bg-[#F5F3EE] px-2.5 py-1 rounded-md">
+                Product update
+              </span>
+              <h3 class="text-base font-semibold text-[#002203] mt-3 group-hover:text-[#00780C] transition leading-snug">
+                Enode is now open to everyone, everywhere
+              </h3>
+              <p class="mt-2 text-sm text-[#555C54] line-clamp-3 leading-relaxed">
+                We’re excited to share that we’re opening access to the Enode platform for builders everywhere...
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <a href="#post-1" class="inline-flex items-center gap-1 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Read more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-[#EBE8DF] flex flex-col justify-between group hover:shadow-md transition">
+          <div>
+            <div class="h-44 overflow-hidden bg-[#EFFCD4]/40">
+              <img src="assets/blog-2.png" alt="Support for new electric vehicles" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-6">
+              <span class="inline-block text-xs font-medium text-[#555C54] bg-[#F5F3EE] px-2.5 py-1 rounded-md">
+                Product update
+              </span>
+              <h3 class="text-base font-semibold text-[#002203] mt-3 group-hover:text-[#00780C] transition leading-snug">
+                Support for new electric vehicles, solar inverters and more
+              </h3>
+              <p class="mt-2 text-sm text-[#555C54] line-clamp-3 leading-relaxed">
+                Today we’re releasing support for even more electric vehicles and green energy hardware across Europe and US...
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <a href="#post-2" class="inline-flex items-center gap-1 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Read more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-[#EBE8DF] flex flex-col justify-between group hover:shadow-md transition">
+          <div>
+            <div class="h-44 overflow-hidden bg-[#C0DEC3]/40">
+              <img src="assets/blog-3.png" alt="Enode raises 15M" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-6">
+              <span class="inline-block text-xs font-medium text-[#555C54] bg-[#F5F3EE] px-2.5 py-1 rounded-md">
+                Company
+              </span>
+              <h3 class="text-base font-semibold text-[#002203] mt-3 group-hover:text-[#00780C] transition leading-snug">
+                Enode raises $15M to accelerate the world’s energy transition
+              </h3>
+              <p class="mt-2 text-sm text-[#555C54] line-clamp-3 leading-relaxed">
+                We’ve raised a $15M Series A to build the digital infrastructure for green energy apps...
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <a href="#post-3" class="inline-flex items-center gap-1 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Read more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-[#EBE8DF] flex flex-col justify-between group hover:shadow-md transition">
+          <div>
+            <div class="h-44 overflow-hidden bg-[#DFEEE1]/40">
+              <img src="assets/blog-4.png" alt="Carge partners with Enode" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            </div>
+            <div class="p-6">
+              <span class="inline-block text-xs font-medium text-[#555C54] bg-[#F5F3EE] px-2.5 py-1 rounded-md">
+                Partnership
+              </span>
+              <h3 class="text-base font-semibold text-[#002203] mt-3 group-hover:text-[#00780C] transition leading-snug">
+                Carge partners with Enode
+              </h3>
+              <p class="mt-2 text-sm text-[#555C54] line-clamp-3 leading-relaxed">
+                Carge is a Greek startup that makes charging your EV easy with seamless charging routes and data...
+              </p>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-2">
+            <a href="#post-4" class="inline-flex items-center gap-1 text-sm font-medium text-[#00780C] group-hover:underline">
+              <span>Read more</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 13. CTA BANNER CARD ("Ready to get started?")                             -->
+  <!-- ========================================================================= -->
+  <section class="py-16 bg-white">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <div class="bg-[#17290E] rounded-3xl p-8 sm:p-12 lg:p-16 text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12 shadow-xl">
+        
+        <!-- Left Content -->
+        <div class="w-full lg:max-w-xl z-10">
+          <h2 class="text-3xl sm:text-4xl lg:text-[40px] font-normal text-white leading-tight">
+            Ready to get started?
+          </h2>
+          <p class="mt-6 text-[18px] text-[#DFEEE1] leading-relaxed">
+            Start exploring our APIs for free with our <a href="#pricing" class="text-white underline font-medium hover:text-[#C0DEC3] transition">Starter plan</a>, or get in touch to have us put together a custom package for you.
+          </p>
+
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a href="#start" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#00780C] hover:bg-[#008f0e] text-white font-medium text-[15px] transition shadow-md">
+              <span>Start building</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a href="#contact" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-medium text-[15px] border border-white/20 transition">
+              <span>Contact sales</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Illustration -->
+        <div class="w-full lg:w-auto flex justify-center lg:justify-end z-10">
+          <div class="w-full max-w-[420px]">
+            <img src="assets/cta-illustration.png" alt="Enode Ready to get started illustration" class="w-full h-auto object-contain">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 14. NEWSLETTER SECTION                                                    -->
+  <!-- ========================================================================= -->
+  <section class="py-12 bg-white">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <div class="bg-[#F5F3EE] rounded-3xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 border border-[#EBE8DF]">
+        
+        <!-- Left: Text -->
+        <div class="w-full lg:max-w-md">
+          <h3 class="text-xl sm:text-[22px] font-semibold text-[#002203]">
+            Lead the transition to open energy
+          </h3>
+          <p class="mt-2 text-sm sm:text-[15px] text-[#555C54]">
+            Subscribe to our monthly newsletter for the latest news, articles and insights.
+          </p>
+        </div>
+
+        <!-- Right: Newsletter Form (Pure HTML, no JS) -->
+        <form action="#" method="GET" class="w-full lg:w-auto flex-1 max-w-md flex flex-col sm:flex-row gap-3">
+          <input 
+            type="email" 
+            placeholder="E-mail address" 
+            required 
+            class="w-full px-4 py-3 bg-white border border-[#DDD9CE] rounded-lg text-sm text-[#002203] placeholder-[#8C887B] focus:outline-none focus:ring-2 focus:ring-[#00780C] focus:border-transparent transition"
+          >
+          <button 
+            type="submit" 
+            class="px-6 py-3 bg-[#17290E] hover:bg-[#00780C] text-white font-medium text-sm rounded-lg whitespace-nowrap transition duration-150"
+          >
+            Sign up
+          </button>
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================================================= -->
+  <!-- 15. FOOTER                                                                -->
+  <!-- ========================================================================= -->
+  <footer class="pt-16 pb-12 bg-white border-t border-[#F0EFEA]">
+    <div class="max-w-figma mx-auto px-6 lg:px-10">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+        
+        <!-- Logo Column -->
+        <div class="md:col-span-3">
+          <a href="#" class="inline-block" aria-label="Enode Home">
+            <img src="assets/logo.png" alt="Enode" class="h-6 w-auto object-contain">
+          </a>
+        </div>
+
+        <!-- Links: Products & Use cases -->
+        <div class="md:col-span-3 space-y-8">
+          <div>
+            <h4 class="text-sm font-semibold text-[#002203] uppercase tracking-wider mb-4">Products</h4>
+            <ul class="space-y-2.5 text-[15px] text-[#555C54]">
+              <li><a href="#connect" class="hover:text-[#00780C] transition">Connect</a></li>
+              <li><a href="#optimize" class="hover:text-[#00780C] transition">Optimize</a></li>
+              <li><a href="#aggregate" class="hover:text-[#00780C] transition">Aggregate</a></li>
+              <li><a href="#pricing" class="hover:text-[#00780C] transition">Pricing</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-sm font-semibold text-[#002203] uppercase tracking-wider mb-4">Use cases</h4>
+            <ul class="space-y-2.5 text-[15px] text-[#555C54]">
+              <li><a href="#use-cases" class="hover:text-[#00780C] transition">Smart charging</a></li>
+              <li><a href="#use-cases" class="hover:text-[#00780C] transition">Energy management and insights</a></li>
+              <li><a href="#use-cases" class="hover:text-[#00780C] transition">Demand response</a></li>
+              <li><a href="#use-cases" class="hover:text-[#00780C] transition">E-mobility</a></li>
+              <li><a href="#use-cases" class="hover:text-[#00780C] transition">EV fleet management</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Links: Developers -->
+        <div class="md:col-span-3">
+          <h4 class="text-sm font-semibold text-[#002203] uppercase tracking-wider mb-4">Developers</h4>
+          <ul class="space-y-2.5 text-[15px] text-[#555C54]">
+            <li><a href="#docs" class="hover:text-[#00780C] transition">API reference</a></li>
+            <li><a href="#docs" class="hover:text-[#00780C] transition">Getting started</a></li>
+            <li><a href="#docs" class="hover:text-[#00780C] transition">Features guides</a></li>
+            <li><a href="#docs" class="hover:text-[#00780C] transition">Reference articles</a></li>
+          </ul>
+        </div>
+
+        <!-- Links: Company -->
+        <div class="md:col-span-3">
+          <h4 class="text-sm font-semibold text-[#002203] uppercase tracking-wider mb-4">Company</h4>
+          <ul class="space-y-2.5 text-[15px] text-[#555C54]">
+            <li><a href="#about" class="hover:text-[#00780C] transition">About us</a></li>
+            <li><a href="#blog" class="hover:text-[#00780C] transition">Blog</a></li>
+            <li><a href="#careers" class="hover:text-[#00780C] transition">Careers</a></li>
+            <li><a href="#contact" class="hover:text-[#00780C] transition">Contact us</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Disclaimer Note -->
+      <div class="mt-16 pt-8 border-t border-[#F0EFEA] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C887B]">
+        <p>
+          Third party logos and brand names are used for information purposes only and do not necessarily indicate affiliation with Enode.
+        </p>
+        <p>
+          &copy; Enode. All rights reserved.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
